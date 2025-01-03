@@ -1,16 +1,22 @@
 # rajas_first_asar_game
 
-A new Flutter project.
+
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project demonstrates the below basic user features for Asar Gaming
 
-A few resources to get you started if this is your first Flutter project:
+[User_Authentication_with_Mobile_OTP]
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+[Trading_Dashboard]
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[OrderManager_LiveMonitor]
+
+This project implements
+[Clean_Architecture]
+[Bloc]              - for state management
+[Getit]             - as a simple service locator for DI
+[auto_route]        - for routing
+[socketio_client]   - to handl websocket communication with the server
+[Dio]               - for network requests
+
