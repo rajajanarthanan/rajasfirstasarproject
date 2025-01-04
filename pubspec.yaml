@@ -13,6 +13,15 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
+  dio: ^5.7.0
+  equatable: ^2.0.7
+  auto_route: ^9.2.2
+  get_it: ^8.0.3
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
+  flutter_clean_architecture: ^6.0.1
+  dartz: ^0.10.1
+  logger: ^2.5.0
 
 dev_dependencies:
   flutter_test:
