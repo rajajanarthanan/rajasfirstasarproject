@@ -1,1 +1,1 @@
-abstract class AsarEntity {}
+abstract class AsarEntity{}
