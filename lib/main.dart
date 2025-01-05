@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:rajas_first_asar_game/app/dependencies.dart';
 
-void main() {
+void main() async{
+  final GetIt getIt = GetIt.instance;
+  await setupDependencies(getIt);
   runApp(const MyApp());
 }
 

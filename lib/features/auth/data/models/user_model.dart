@@ -15,12 +15,14 @@ class UserModel with _$UserModel {
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
+}
 
-  User toEntity() {
+extension UserModelToEntity on UserModel {
+  User call() {
     return User(
       uid: uid,
       mobileNumber: mobileNumber,
-      auth: auth?.toEntity(),
+      auth: auth?.call(),
     );
   }
 }
@@ -36,7 +38,10 @@ class AuthModel with _$AuthModel {
 
   factory AuthModel.fromJson(Map<String, dynamic> json) => _$AuthModelFromJson(json);
 
-  Auth toEntity() {
+}
+
+extension AuthModelToEntity on AuthModel {
+  Auth call() {
     return Auth(
       state: state,
       token: token,

@@ -1,34 +1,23 @@
 import 'package:dartz/dartz.dart';
-import 'package:logger/logger.dart';
-
-
-/***
- * This class is used to handle the execution of a function with error handling
- */
-class AsarHandle {
-  Future<Either<String, dynamic>> call(
+/// *
+/// This function is used to handle the execution of a function 
+/// with exception handling  behavior thrughout the app.
+/// additionally configure contextless alert to user if alertUser is true
+/// TODO: add optional remote logging feature
+/// *
+// class AsarHandle {
+  Future<Either<String, dynamic>> safeCall(
     Function toDo, {
     String? logTitle,
-    List<dynamic>? positionalArgs,
-    Map<Symbol, dynamic>? namedArgs,
+    bool alertUser = false,
   }) async {
-    final logger = Logger();
-
     try {
-      // Call the function
-      final result = Function.apply(toDo, positionalArgs, namedArgs);
-
-      // Resolve the result if it's a Future
+      final result = Function.apply(toDo, []);
       final resolvedResult = result is Future ? await result : result;
-      
-      // Return the result as Right if successful
       return Right(resolvedResult);
     } catch (e) {
-      // Log the error and return it as Left if failed
-      logger.e('$logTitle ${e.toString()}');
-
+      // TODO: Show Contextless alert / SnackbarAlert to user if alertUser is true
       // Return the error as Left
-      return Left('Failed: ${e.toString()}');
+      return Left(e.toString());
     }
   }
-}
