@@ -1,15 +1,11 @@
 import 'package:rajas_first_asar_game/app/global_exports.dart';
 
-abstract class AsarRepositoryContract {
+abstract class AsarRepositoryInterface {
   /// Api methods
   // Future<T> getApi<T>(String url, T Function(Map<String, dynamic>) fromJson, {Map<String, dynamic>? queryParams});
   Future<Either<String, T>> getApi<T extends AsarModel>(
     {required String endPoint, required T Function(Map<String, dynamic>) fromJson,
      String? baseUrl, Map<String, dynamic>? queryParams});
-
-  
-
-  // Future<T> postApi<T>(T data);
 
   Future<Either<String, T>> postApi<T extends AsarModel>({
     required String endPoint,
@@ -17,6 +13,12 @@ abstract class AsarRepositoryContract {
     required T Function(Map<String, dynamic>) fromJson,
     String? baseUrl,
   });
+
+  /// Socket methods
+  Future<Either<String, Stream<T>>> getSocketStream<T extends AsarModel>(
+    {required String eventName, required String streamName, required T Function(Map<String, dynamic>) fromJson});
+  
+
 
   /// Local (Hive) methods
   Future<T> getLocal<T>();

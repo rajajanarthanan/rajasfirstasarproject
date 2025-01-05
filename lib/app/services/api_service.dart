@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:rajas_first_asar_game/core/services/api_service_contract.dart';
+import 'package:rajas_first_asar_game/core/services/api_service_interface.dart';
 import '../global_exports.dart';
 
 
-class ApiService implements ApiServiceContract{
+class ApiService implements ApiServiceInterface{
 final Dio _dio = GetIt.I<Dio>();
 @override
 Future<Either<String,T>> get<T>(String endPoint,T Function(Map<String, dynamic>) responseFromJson, {Map<String, dynamic>? queryParams, String? baseUrl}) async{

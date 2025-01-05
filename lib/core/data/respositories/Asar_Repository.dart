@@ -1,7 +1,10 @@
-import 'package:rajas_first_asar_game/app/global_exports.dart';
-import 'package:rajas_first_asar_game/core/domain/repository_contracts/asar_repository_contract.dart';
+import 'dart:async';
 
-class AsarRepository implements AsarRepositoryContract  {
+import 'package:rajas_first_asar_game/app/global_exports.dart';
+import 'package:rajas_first_asar_game/app/services/web_socket_service.dart';
+import 'package:rajas_first_asar_game/core/domain/repository_interfaces/asar_repository_interface.dart';
+
+class AsarRepository implements AsarRepositoryInterface {
 
 @override  
 Future<Either<String, T>> getApi<T extends AsarModel>({
@@ -46,9 +49,27 @@ Future<Either<String, T>> getApi<T extends AsarModel>({
       (data) => Right(data),
     );
   }
-    
-    
 
+  @override
+  Future<Either<String, Stream<T>>> getSocketStream<T extends AsarModel>({
+    required String eventName, required String streamName,
+    required T Function(Map<String, dynamic>) fromJson,
+  }) async {
+    final result = await safeCall(() async {
+      final webSocketService = GetIt.I.get<WebSocketService>();
+      return await webSocketService.registerListener(eventName, streamName, fromJson);      
+    });
+
+
+    return result.fold(
+      (failure) => Left(failure),
+      (data) => Right(data),
+    );
+  }
+
+    
+    
+  
   
 
   @override
