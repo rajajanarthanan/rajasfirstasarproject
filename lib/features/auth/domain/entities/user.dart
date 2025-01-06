@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rajas_first_asar_game/core/domain/entitiies/asar_entity.dart';
 
 class User extends Equatable implements AsarEntity {
@@ -26,6 +25,6 @@ class Auth extends Equatable{
 }
 
 enum AuthState{
-  @JsonValue('authenticated') authenticated,
-  @JsonValue('unathenticated') unauthenticated
+  authenticated,
+  unauthenticated
 }

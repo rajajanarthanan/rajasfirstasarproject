@@ -3,20 +3,21 @@ import 'package:rajas_first_asar_game/app/global_exports.dart';
 abstract class AsarRepositoryInterface {
   /// Api methods
   // Future<T> getApi<T>(String url, T Function(Map<String, dynamic>) fromJson, {Map<String, dynamic>? queryParams});
-  Future<Either<String, T>> getApi<T extends AsarModel>(
+  Future<Either<String, dynamic>> getApi<T extends AsarModel>(
     {required String endPoint, required T Function(Map<String, dynamic>) fromJson,
      String? baseUrl, Map<String, dynamic>? queryParams});
 
-  Future<Either<String, T>> postApi<T extends AsarModel>({
+  Future<Either<String, dynamic>> postApi<T extends AsarModel>({
     required String endPoint,
     required Map<String, dynamic> payloadData,
     required T Function(Map<String, dynamic>) fromJson,
     String? baseUrl,
+    String? bearerToken
   });
 
   /// Socket methods
   Future<Either<String, Stream<T>>> getSocketStream<T extends AsarModel>(
-    {required String eventName, required String streamName, required T Function(Map<String, dynamic>) fromJson});
+    {required String eventName, required T Function(Map<String, dynamic>) fromJson});
   
 
 

@@ -7,60 +7,71 @@ import 'package:rajas_first_asar_game/core/domain/repository_interfaces/asar_rep
 class AsarRepository implements AsarRepositoryInterface {
 
 @override  
-Future<Either<String, T>> getApi<T extends AsarModel>({
+Future<Either<String, dynamic>> getApi<T extends AsarModel>({
   required String endPoint,
   required T Function(Map<String, dynamic>) fromJson,
   String? baseUrl,
   Map<String, dynamic>? queryParams,
 }) async {
-  final result = await safeCall(() async {
     final apiService = GetIt.I.get<ApiService>();
     final response = await apiService.get<T>(
       endPoint,
       fromJson,
       queryParams: queryParams,
     );
-    return response;
-  });
-  return result.fold(
-    (failure) => Left(failure),
-    (data) => Right(data),
-  );
+    return response.fold((l) => Left(l),
+    (r){
+      if(r is Lob){
+        final values = r.getValue as List<T>;
+        return Right(values);
+      }
+      if(r is Sob){
+        final value = r.getValue as T;
+        return Right(value);
+      }
+      return Right(r);
+    }
+    );
+  
+  
 }
 
   @override
-  Future<Either<String, T>> postApi<T extends AsarModel>({
+  Future<Either<String, dynamic>> postApi<T extends AsarModel>({
     required String endPoint,
     required Map<String, dynamic> payloadData,
     required T Function(Map<String, dynamic>) fromJson,
     String? baseUrl,
+    String? bearerToken
   }) async {
-    final result = await safeCall(() async {
       final apiService = GetIt.I.get<ApiService>();
       final response = await apiService.post<T>(
         endPoint,
         payloadData,
-        fromJson,
+        fromJson, bearerToken: bearerToken
       );
-      return response;
-    });
-    return result.fold(
-      (failure) => Left(failure),
-      (data) => Right(data),
-    );
+      return response.fold((l)=> Left(l), 
+      (r){
+        if(r is Lob){
+        final values = r.getValue as List<T>;
+        return Right(values);
+      }
+      if(r is Sob){
+        final value = r.getValue as T;
+        return Right(value);
+      }
+      return Right(r);
+      }
+      );
   }
 
   @override
   Future<Either<String, Stream<T>>> getSocketStream<T extends AsarModel>({
-    required String eventName, required String streamName,
+    required String eventName, 
     required T Function(Map<String, dynamic>) fromJson,
   }) async {
-    final result = await safeCall(() async {
       final webSocketService = GetIt.I.get<WebSocketService>();
-      return await webSocketService.registerListener(eventName, streamName, fromJson);      
-    });
-
-
+      final result = await webSocketService.registerListener(eventName, fromJson);      
     return result.fold(
       (failure) => Left(failure),
       (data) => Right(data),

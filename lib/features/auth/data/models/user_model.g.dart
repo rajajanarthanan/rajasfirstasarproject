@@ -38,5 +38,5 @@ Map<String, dynamic> _$$AuthModelImplToJson(_$AuthModelImpl instance) =>
 
 const _$AuthStateEnumMap = {
   AuthState.authenticated: 'authenticated',
-  AuthState.unauthenticated: 'unathenticated',
+  AuthState.unauthenticated: 'unauthenticated',
 };

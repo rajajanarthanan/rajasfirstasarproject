@@ -4,6 +4,6 @@ abstract class WebSocketServiceInterface {
   void connect();
   void disconnect();
   void send(String message);
-  Future<Either<String, Stream<T>>> registerListener<T extends AsarModel>(String eventName, String listenerName, T Function(Map<String, dynamic> payload) fromJson);
+  Future<Either<String, Stream<T>>> registerListener<T extends AsarModel>(String eventName, T Function(Map<String, dynamic> payload) fromJson);
   void removeListener(Function(String) listener);
 }
