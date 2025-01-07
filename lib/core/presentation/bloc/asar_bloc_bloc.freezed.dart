@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'testbloc_bloc.dart';
+part of 'asar_bloc_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$TestblocEvent {
+mixin _$AsarBlocEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
@@ -51,23 +51,23 @@ mixin _$TestblocEvent {
 }
 
 /// @nodoc
-abstract class $TestblocEventCopyWith<$Res> {
-  factory $TestblocEventCopyWith(
-          TestblocEvent value, $Res Function(TestblocEvent) then) =
-      _$TestblocEventCopyWithImpl<$Res, TestblocEvent>;
+abstract class $AsarBlocEventCopyWith<$Res> {
+  factory $AsarBlocEventCopyWith(
+          AsarBlocEvent value, $Res Function(AsarBlocEvent) then) =
+      _$AsarBlocEventCopyWithImpl<$Res, AsarBlocEvent>;
 }
 
 /// @nodoc
-class _$TestblocEventCopyWithImpl<$Res, $Val extends TestblocEvent>
-    implements $TestblocEventCopyWith<$Res> {
-  _$TestblocEventCopyWithImpl(this._value, this._then);
+class _$AsarBlocEventCopyWithImpl<$Res, $Val extends AsarBlocEvent>
+    implements $AsarBlocEventCopyWith<$Res> {
+  _$AsarBlocEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of TestblocEvent
+  /// Create a copy of AsarBlocEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -80,13 +80,13 @@ abstract class _$$StartedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$StartedImplCopyWithImpl<$Res>
-    extends _$TestblocEventCopyWithImpl<$Res, _$StartedImpl>
+    extends _$AsarBlocEventCopyWithImpl<$Res, _$StartedImpl>
     implements _$$StartedImplCopyWith<$Res> {
   __$$StartedImplCopyWithImpl(
       _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of TestblocEvent
+  /// Create a copy of AsarBlocEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -97,7 +97,7 @@ class _$StartedImpl implements _Started {
 
   @override
   String toString() {
-    return 'TestblocEvent.started()';
+    return 'AsarBlocEvent.started()';
   }
 
   @override
@@ -166,12 +166,12 @@ class _$StartedImpl implements _Started {
   }
 }
 
-abstract class _Started implements TestblocEvent {
+abstract class _Started implements AsarBlocEvent {
   const factory _Started() = _$StartedImpl;
 }
 
 /// @nodoc
-mixin _$TestblocState {
+mixin _$AsarBlocState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -207,23 +207,23 @@ mixin _$TestblocState {
 }
 
 /// @nodoc
-abstract class $TestblocStateCopyWith<$Res> {
-  factory $TestblocStateCopyWith(
-          TestblocState value, $Res Function(TestblocState) then) =
-      _$TestblocStateCopyWithImpl<$Res, TestblocState>;
+abstract class $AsarBlocStateCopyWith<$Res> {
+  factory $AsarBlocStateCopyWith(
+          AsarBlocState value, $Res Function(AsarBlocState) then) =
+      _$AsarBlocStateCopyWithImpl<$Res, AsarBlocState>;
 }
 
 /// @nodoc
-class _$TestblocStateCopyWithImpl<$Res, $Val extends TestblocState>
-    implements $TestblocStateCopyWith<$Res> {
-  _$TestblocStateCopyWithImpl(this._value, this._then);
+class _$AsarBlocStateCopyWithImpl<$Res, $Val extends AsarBlocState>
+    implements $AsarBlocStateCopyWith<$Res> {
+  _$AsarBlocStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of TestblocState
+  /// Create a copy of AsarBlocState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -236,13 +236,13 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$TestblocStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$AsarBlocStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of TestblocState
+  /// Create a copy of AsarBlocState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -253,7 +253,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'TestblocState.initial()';
+    return 'AsarBlocState.initial()';
   }
 
   @override
@@ -322,6 +322,6 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements TestblocState {
+abstract class _Initial implements AsarBlocState {
   const factory _Initial() = _$InitialImpl;
 }

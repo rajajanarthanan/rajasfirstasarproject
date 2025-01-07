@@ -11,21 +11,30 @@ class WebSocketService implements WebSocketServiceInterface {
   
   //eventName -> streamController
   Map<String,StreamController<dynamic>> listeners = {}; 
-   WebSocketService(){
+
+    final StreamController<OrderBookUpdateModel> _orderBookStreamController =
+      StreamController<OrderBookUpdateModel>.broadcast();
+
+  WebSocketService(){
       socket = IO.io(Config.asarWebSocket.baseUrl);
       socket.onConnect((_) {
         socket.emit('msg', 'test');
       });
 
-    // socket.on(Config.asarWebSocket.socketEvents.orderbookUpdate,(data){
-    //   if(!listeners.containsKey(Config.asarWebSocket.socketEvents.orderbookUpdate)){
-    //     StreamController<OrderBookUpdateModel> streamController = StreamController<OrderBookUpdateModel>();
+    
 
-    //   }
-    //   print('orderbook update: $data');
-    // });
+    socket.on(Config.asarWebSocket.socketEvents.orderbookUpdate,(data){
+      final update = OrderBookUpdateModel.fromJson(data);
+      _orderBookStreamController.add(update); 
+
+      print('orderbook update: $data');
+    });
     connect();
    }
+
+  Stream<OrderBookUpdateModel> get orderBookUpdates =>
+    _orderBookStreamController.stream;
+ 
   @override
   void connect() {
     socket.connect();
@@ -48,6 +57,8 @@ class WebSocketService implements WebSocketServiceInterface {
     socket.dispose();
   }
   
+
+
   @override
   Future<Either<String, Stream<T>>> registerListener<T extends AsarModel>(String eventName,
   T Function(Map<String, dynamic> payload) fromJson) async{

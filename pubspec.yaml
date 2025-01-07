@@ -28,6 +28,9 @@ dependencies:
   json_serializable:
   test: ^1.25.8
   socket_io_client: ^3.0.2
+  get: ^4.6.6
+  getwidget: ^5.0.0
+  
 
 dev_dependencies:
   flutter_test:
