@@ -6,7 +6,9 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 import '../global_exports.dart';
 import 'auth_service.dart';
-
+/***
+ * //TODO: Should Init after AuthService gets auth from AuthView - loginUse Case sets thru asarRepo, split ti to AuthRepo later
+ */
 class WebSocketService implements WebSocketServiceInterface {
   late final IO.Socket socket; 
   
