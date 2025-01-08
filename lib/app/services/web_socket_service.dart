@@ -5,6 +5,7 @@ import 'package:rajas_first_asar_game/features/events_trading/data/models/order_
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 import '../global_exports.dart';
+import 'auth_service.dart';
 
 class WebSocketService implements WebSocketServiceInterface {
   late final IO.Socket socket; 
@@ -14,9 +15,17 @@ class WebSocketService implements WebSocketServiceInterface {
 
     final StreamController<OrderBookUpdateModel> _orderBookStreamController =
       StreamController<OrderBookUpdateModel>.broadcast();
+  final authService = GetIt.I.get<AuthService>();
+  get connectionOpts => IO.OptionBuilder()
+        .setTransports(['websocket']) 
+        .setExtraHeaders({
+          'Authorization': 'Bearer ${authService.user?.auth?.token}',
+          'sessionId': authService.user?.auth?.sessionId,
+        })
+        .build();
 
   WebSocketService(){
-      socket = IO.io(Config.asarWebSocket.baseUrl);
+      socket = IO.io(Config.asarWebSocket.baseUrl, connectionOpts);
       socket.onConnect((_) {
         socket.emit('msg', 'test');
       });
@@ -29,7 +38,7 @@ class WebSocketService implements WebSocketServiceInterface {
 
       print('orderbook update: $data');
     });
-    connect();
+    // connect();
    }
 
   Stream<OrderBookUpdateModel> get orderBookUpdates =>

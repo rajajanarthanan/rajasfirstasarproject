@@ -13,8 +13,9 @@ Future<void> setupDependencies(GetIt getIt) async{
   getIt.registerSingleton<AsarRepository>(AsarRepository());
   getIt.registerSingleton<TestWidgetController>(TestWidgetController());
   
-  getIt.registerSingleton(WebSocketService());
+  // getIt.registerSingleton(WebSocketService());
 
+  getIt.registerLazySingleton(()=> WebSocketService());
   getIt.registerLazySingleton(()=> ApiService());
 
 }

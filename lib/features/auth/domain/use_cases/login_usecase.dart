@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:rajas_first_asar_game/app/config.dart';
 import 'package:rajas_first_asar_game/app/services/auth_service.dart';
+import 'package:rajas_first_asar_game/app/services/web_socket_service.dart';
 import 'package:rajas_first_asar_game/core/data/models/response_models.dart';
 import 'package:rajas_first_asar_game/core/data/respositories/Asar_Repository.dart';
 import 'package:rajas_first_asar_game/features/auth/domain/entities/user.dart';
@@ -32,6 +33,11 @@ class LoginUsecase implements AuthUsecase{
       authService.setUser(validUser);
       print('validUser: $validUser');
       print('authService_user: ${authService.user}');
+      final ws = GetIt.I.get<WebSocketService>();
+      // initalize ws here, let it connect with tokens
+      // made it lazy, here it will be initiated instead of app init
+      ws.connect();
+      
       return validUser;
 
      });

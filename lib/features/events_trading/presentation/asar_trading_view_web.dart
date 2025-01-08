@@ -7,18 +7,16 @@ import 'package:rajas_first_asar_game/app/services/web_socket_service.dart';
 import 'package:rajas_first_asar_game/features/auth/presentation/bloc/auth_bloc_bloc.dart';
 import 'package:rajas_first_asar_game/features/events_trading/data/models/order_book_update_model.dart';
 import 'package:rajas_first_asar_game/features/events_trading/data/models/trading_events_model.dart';
-import 'package:rajas_first_asar_game/features/events_trading/presentation/asar_trading_view_mobile.dart';
-import 'package:rajas_first_asar_game/features/events_trading/presentation/asar_trading_view_web.dart';
 import 'package:rajas_first_asar_game/features/events_trading/presentation/asar_tradingview_controller.dart';
 import 'package:rajas_first_asar_game/features/events_trading/presentation/asar_events/asar_tv_events_bloc.dart';
 import 'package:rajas_first_asar_game/features/events_trading/presentation/order_book_update_controller.dart';
 
-class AsarTradingView extends StatefulWidget {
+class AsarTradingViewWeb extends StatefulWidget {
   @override
-  State<AsarTradingView> createState() => _AsarTradingViewState();
+  State<AsarTradingViewWeb> createState() => _AsarTradingViewWebState();
 }
 
-class _AsarTradingViewState extends State<AsarTradingView> {
+class _AsarTradingViewWebState extends State<AsarTradingViewWeb> {
   late final AsarTradingviewController controller;
   late final OrderBookUpdateController orderBookController;
 
@@ -33,18 +31,48 @@ class _AsarTradingViewState extends State<AsarTradingView> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<AsarTvEventsBloc>(
-            create: (BuildContext context) => AsarTvEventsBloc())
-      ],
-      child: Scaffold(
-        appBar: AppBar(title: const Text('Trading Dashboard')),
-        body: Center(
-          child: GetPlatform.isMobile ? AsarTradingViewMobile() : AsarTradingViewWeb(),
-        ),
-      ),
-    );
+    return Row(
+            children: [
+              Expanded(flex: 1, child: EventsListViewer()),
+              Expanded(
+                  flex: 1,
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                            flex: 1,
+                            child: Container(
+                                child: BlocBuilder<AsarTvEventsBloc, AsarTvEventsState>(
+                              builder: (context, state) {
+                                return state.when(error: () => Center(child: Text("Error, Cannot be loaded Now")),
+                                loading: () => Center(child: SizedBox(height: 300,width: 300,child: CircularProgressIndicator())),
+                                initial: () => Center(child: SizedBox(height: 300,width: 300,child: CircularProgressIndicator())),
+                                loaded: (events) => GFCarousel(
+                                  autoPlay: true,
+                                  items:events.map((e)=>EventCard(e)).toList(),
+                                )); //GFCarousel(items: items);
+                              },
+                            ))),
+
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            child: Obx(() => (orderBookController.orderBookUpdate.value != null) ?
+                              OrderBooklet(orderBookController.orderBookUpdate.value!)
+                              // SingleChildScrollView(child:
+                              //  Column(children: orderBookController.orderBookUpdate.value.map
+                              //  ((order)=>OrderBooklet(order)).toList()))
+                              : Center(child: Text("No Trades to show yet"),)
+                            ),
+                          )
+                        ),                           
+                        
+                      ],
+                    ),
+                  ))
+            ],
+          );
   }
 }
 
